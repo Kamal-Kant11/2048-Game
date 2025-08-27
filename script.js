@@ -129,7 +129,7 @@ function mergeLine(line) {
 }
 
 //giving touch ontrols for smartphone use 
-ddocument.addEventListener('touchstart', handleTouchStart, false);
+document.addEventListener('touchstart', handleTouchStart, false);
 document.addEventListener('touchmove', handleTouchMove, false);
 document.addEventListener('touchend', handleTouchEnd, false);
 
@@ -170,6 +170,7 @@ function handleTouchEnd(event) {
     }
   }
 }
+
 function checkGameOver() {
     // Check if there are any empty tiles
     const hasEmpty = tiles.some(tile => tile.dataset.value == 0);
@@ -207,3 +208,4 @@ initializeGame();
 //game borad initializes when the restart button clicks
 
 restart.addEventListener("click", initializeGame);
+
