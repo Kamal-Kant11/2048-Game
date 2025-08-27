@@ -50,6 +50,24 @@ function updateBoard() {
     scoreDisplay.innerHTML = score;
 }
 
+// giving keyboard controls to the game 
+window.addEventListener("keydown", function(dets){
+    switch(dets.key){
+        case "ArrowUp":
+            move("up");
+            break;
+        case "ArrowDown":
+            move("down");
+            break;
+        case "ArrowLeft":
+            move("left");
+            break;
+        case "ArrowRight":
+            move("right");
+            break;
+    }
+})
+
 // Function for tile moving 
 function move(direction) {
     let moved = false
@@ -110,24 +128,48 @@ function mergeLine(line) {
     return line;
 }
 
-// giving controls to the game 
-window.addEventListener("keydown", function(dets){
-    switch(dets.key){
-        case "ArrowUp":
-            move("up");
-            break;
-        case "ArrowDown":
-            move("down");
-            break;
-        case "ArrowLeft":
-            move("left");
-            break;
-        case "ArrowRight":
-            move("right");
-            break;
-    }
-})
+//giving touch ontrols for smartphone use 
+ddocument.addEventListener('touchstart', handleTouchStart, false);
+document.addEventListener('touchmove', handleTouchMove, false);
+document.addEventListener('touchend', handleTouchEnd, false);
 
+let touchStartX = 0;
+let touchStartY = 0;
+
+function handleTouchStart(event) {
+  touchStartX = event.touches[0].clientX;
+  touchStartY = event.touches[0].clientY;
+}
+
+function handleTouchMove(event) {
+  event.preventDefault();
+}
+
+function handleTouchEnd(event) {
+  let touchEndX = event.changedTouches[0].clientX;
+  let touchEndY = event.changedTouches[0].clientY;
+
+  let deltaX = touchEndX - touchStartX;
+  let deltaY = touchEndY - touchStartY;
+
+  if (Math.abs(deltaX) > Math.abs(deltaY)) {
+    if (deltaX > 0) {
+      // Swipe right
+      move("right");
+    } else {
+      // Swipe left
+      move("left");
+    }
+  } else {
+    if (deltaY > 0) {
+      // Swipe down
+      move("down");
+    } else {
+      // Swipe up
+      move("up");
+    }
+  }
+}
 function checkGameOver() {
     // Check if there are any empty tiles
     const hasEmpty = tiles.some(tile => tile.dataset.value == 0);
@@ -163,4 +205,5 @@ function checkGameOver() {
 initializeGame();
 
 //game borad initializes when the restart button clicks
+
 restart.addEventListener("click", initializeGame);
