@@ -50,24 +50,20 @@ function updateBoard() {
     scoreDisplay.innerHTML = score;
 }
 
-// giving controls to the game 
+// giving keyboard controls to the game 
 document.addEventListener("keydown", function(dets){
     switch(dets.key){
         case "ArrowUp":
             move("up");
-            document.querySelector(".box").innerHTML = "<h3>UP</h3>"
             break;
         case "ArrowDown":
             move("down");
-            document.querySelector(".box").innerHTML = "<h3>DOWN</h3>"
             break;
         case "ArrowLeft":
             move("left");
-            document.querySelector(".box").innerHTML = "<h3>LEFT</h3>"
             break;
         case "ArrowRight":
             move("right");
-            document.querySelector(".box").innerHTML = "<h3>RIGHT</h3>"
             break;
     }
 })
@@ -109,6 +105,7 @@ function move(direction) {
     
     // if move happens then only new tiles are added
     if(moved) {
+        document.querySelector(".box").innerHTML = `<h3>${JSON.stringify(direction).toUpperCase()}</h3>`;
         addRandomTiles();
         updateBoard();
         checkGameOver();
