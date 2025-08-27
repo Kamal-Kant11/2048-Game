@@ -9,7 +9,7 @@ let tiles = [];
 function initializeGame() {
     board.innerHTML = "";
     tiles = [];
-    // scoreDisplay.innerHTML = 0;
+    document.querySelector(".box").innerHTML = "<h3>START</h3>";
     score = 0;
     //Creating structure of the game-board
     for (i=0; i<16; i++) {
@@ -50,20 +50,24 @@ function updateBoard() {
     scoreDisplay.innerHTML = score;
 }
 
-// giving keyboard controls to the game 
-window.addEventListener("keydown", function(dets){
+// giving controls to the game 
+document.addEventListener("keydown", function(dets){
     switch(dets.key){
         case "ArrowUp":
             move("up");
+            document.querySelector(".box").innerHTML = "<h3>UP</h3>"
             break;
         case "ArrowDown":
             move("down");
+            document.querySelector(".box").innerHTML = "<h3>DOWN</h3>"
             break;
         case "ArrowLeft":
             move("left");
+            document.querySelector(".box").innerHTML = "<h3>LEFT</h3>"
             break;
         case "ArrowRight":
             move("right");
+            document.querySelector(".box").innerHTML = "<h3>RIGHT</h3>"
             break;
     }
 })
@@ -128,7 +132,7 @@ function mergeLine(line) {
     return line;
 }
 
-//giving touch ontrols for smartphone use 
+//giving controls for mobile touches
 document.addEventListener('touchstart', handleTouchStart, false);
 document.addEventListener('touchmove', handleTouchMove, false);
 document.addEventListener('touchend', handleTouchEnd, false);
@@ -206,6 +210,4 @@ function checkGameOver() {
 initializeGame();
 
 //game borad initializes when the restart button clicks
-
 restart.addEventListener("click", initializeGame);
-
